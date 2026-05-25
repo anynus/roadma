@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roadmap Dokter — Dari Kelas 2 SMA</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #22c55e;
+    --green-dark: #16a34a;
+    --green-light: #dcfce7;
+    --blue: #3b82f6;
+    --blue-dark: #1d4ed8;
+    --blue-light: #dbeafe;
+    --purple: #a855f7;
+    --purple-dark: #7e22ce;
+    --purple-light: #f3e8ff;
+    --teal: #14b8a6;
+    --navy: #1e3a5f;
+    --bg: #f0f7ff;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 24px rgba(30,58,95,0.10);
+    --shadow-hover: 0 8px 40px rgba(30,58,95,0.18);
+    --connector: #94a3b8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, #2563eb 100%);
+    color: #fff;
+    text-align: center;
+    padding: 48px 20px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .header h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 1.1rem;
+    opacity: 0.85;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .header .vision-badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    max-width: 360px;
+  }
+  .header .vision-badge strong { display: block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 4px; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+
+  /* LAYOUT */
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+
+  /* GRID SECTIONS */
+  .section {
+    display: grid;
+    grid-template-columns: 220px 1fr 220px;
+    gap: 24px;
+    margin-bottom: 0;
+    position: relative;
+    align-items: start;
+  }
+  .section-center { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+  /* STAGE LABEL */
+  .stage-label {
+    text-align: center;
+    padding: 8px 28px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+  .stage-label.green { background: var(--green-light); color: var(--green-dark); }
+  .stage-label.blue  { background: var(--blue-light);  color: var(--blue-dark);  }
+  .stage-label.purple{ background: var(--purple-light); color: var(--purple-dark);}
+
+  /* MAIN NODE */
+  .main-node {
+    background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 20px 28px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    width: 220px;
+    box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+    transition: all 0.22s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    margin: 8px 0;
+  }
+  .main-node:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 36px rgba(34,197,94,0.45);
+  }
+  .main-node.blue-node {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--navy) 100%);
+    box-shadow: 0 4px 20px rgba(59,130,246,0.3);
+  }
+  .main-node.blue-node:hover { box-shadow: 0 10px 36px rgba(59,130,246,0.45); }
+  .main-node.final-node {
+    background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    box-shadow: 0 4px 20px rgba(245,158,11,0.35);
+    font-size: 1.12rem;
+  }
+  .main-node.final-node:hover { box-shadow: 0 10px 36px rgba(245,158,11,0.5); }
+  .main-node span { font-size: 0.82rem; font-weight: 500; opacity: 0.9; display: block; margin-top: 2px; }
+
+  /* STEP NODES */
+  .step-node {
+    background: #fff;
+    border: 2px solid var(--green);
+    border-radius: 12px;
+    padding: 11px 22px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.88rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--navy);
+    display: block;
+    width: 220px;
+    transition: all 0.2s ease;
+    margin: 4px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .step-node:hover {
+    background: var(--green-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(34,197,94,0.2);
+    border-color: var(--green-dark);
+  }
+  .step-node.blue { border-color: var(--blue); }
+  .step-node.blue:hover { background: var(--blue-light); box-shadow: 0 6px 18px rgba(59,130,246,0.2); border-color: var(--blue-dark); }
+
+  /* ARROW */
+  .arrow {
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green), var(--teal));
+    margin: 0 auto;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .arrow::after {
+    content: '▼';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--teal);
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+  .arrow.blue-arrow { background: linear-gradient(to bottom, var(--blue), var(--navy)); }
+  .arrow.blue-arrow::after { color: var(--navy); }
+
+  /* SIDE CARDS */
+  .side-col { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; }
+
+  .card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 18px 18px 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+
+  .card-title {
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .card-title.green { color: var(--green-dark); border-color: var(--green); }
+  .card-title.blue  { color: var(--blue-dark);  border-color: var(--blue);  }
+  .card-title.purple{ color: var(--purple-dark); border-color: var(--purple);}
+  .card-title.teal  { color: var(--teal);        border-color: var(--teal);  }
+
+  /* CHIP LINKS */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.18s ease;
+  }
+  .chip.green  { background: var(--green-light);  color: var(--green-dark);  border: 1px solid #bbf7d0; }
+  .chip.green:hover  { background: var(--green);  color: #fff; }
+  .chip.blue   { background: var(--blue-light);   color: var(--blue-dark);   border: 1px solid #bfdbfe; }
+  .chip.blue:hover   { background: var(--blue);   color: #fff; }
+  .chip.purple { background: var(--purple-light); color: var(--purple-dark); border: 1px solid #e9d5ff; }
+  .chip.purple:hover { background: var(--purple); color: #fff; }
+  .chip.teal   { background: #ccfbf1;             color: #0f766e;            border: 1px solid #99f6e4; }
+  .chip.teal:hover   { background: var(--teal);   color: #fff; }
+  .chip.orange { background: #ffedd5;             color: #c2410c;            border: 1px solid #fed7aa; }
+  .chip.orange:hover { background: #f97316;        color: #fff; }
+
+  /* LIST inside cards */
+  .card-list { list-style: none; }
+  .card-list li {
+    padding: 6px 0;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 7px;
+  }
+  .card-list li:last-child { border-bottom: none; }
+  .card-list li::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .card-list li.blue::before  { color: var(--blue); }
+  .card-list li.purple::before{ color: var(--purple); }
+
+  /* DIVIDER */
+  .phase-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 36px 0 20px;
+  }
+  .phase-divider hr { flex: 1; border: none; border-top: 2px dashed var(--border); }
+  .phase-divider .phase-tag {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 999px;
+    padding: 6px 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* FOOTER */
+  .footer-bar {
+    background: var(--navy);
+    color: #fff;
+    text-align: center;
+    padding: 18px 20px;
+    margin-top: 60px;
+    font-weight: 700;
+    font-size: 0.98rem;
+    letter-spacing: 0.5px;
+  }
+  .footer-bar span { color: #fbbf24; }
+
+  /* BOTTOM INFO CARDS */
+  .info-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  /* TOOLTIP */
+  .tooltip-wrap { position: relative; display: inline-block; }
+  .tooltip-box {
+    visibility: hidden;
+    opacity: 0;
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    border-radius: 10px;
+    padding: 10px 14px;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    transition: opacity 0.18s ease;
+    text-align: left;
+  }
+  .tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--navy);
+  }
+  .tooltip-wrap:hover .tooltip-box { visibility: visible; opacity: 1; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    padding: 32px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+    position: relative;
+    animation: modalIn 0.22s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.92) translateY(16px); opacity: 0; }
+    to   { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 18px;
+    background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted);
+  }
+  .modal h2 { font-family: 'Lora', serif; font-size: 1.4rem; margin-bottom: 10px; color: var(--navy); }
+  .modal p  { font-size: 0.9rem; color: var(--muted); line-height: 1.65; margin-bottom: 14px; }
+  .modal-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .modal-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--blue-light); color: var(--blue-dark);
+    border-radius: 8px; padding: 7px 14px; font-size: 0.82rem; font-weight: 700;
+    text-decoration: none; border: 1px solid #bfdbfe;
+    transition: background 0.15s;
+  }
+  .modal-link:hover { background: var(--blue); color: #fff; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .section { grid-template-columns: 1fr; }
+    .section-center { align-items: stretch; }
+    .main-node, .step-node { width: 100%; }
+    .side-col { padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>🩺 Roadmap Dokter ade nadia</h1>
+  <p>Dari Kelas 2 SMA</p>
+  <div class="vision-badge">
+    <strong>Visi</strong>
+    Menjadi dokter yang kompeten, berakhlak mulia, dan bermanfaat bagi sesama.
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="dot" style="background:var(--green)"></div> Wajib / Utama</div>
+  <div class="legend-item"><div class="dot" style="background:var(--blue)"></div> Penting / Pendukung</div>
+  <div class="legend-item"><div class="dot" style="background:var(--purple)"></div> Pengembangan Diri</div>
+</div>
+
+<div class="page">
+
+  <!-- ═══════════════════ KELAS 2 SMA ═══════════════════ -->
+  <div class="phase-divider"><hr><div class="phase-tag">📚 Kelas 2 SMA — Usia 16–17</div><hr></div>
+
+  <div class="section">
+    <!-- LEFT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title green">Prinsip Utama</div>
+        <ul class="card-list">
+          <li>Niat &amp; Tujuan yang Jelas</li>
+          <li>Disiplin &amp; Konsisten</li>
+          <li>Belajar Cerdas</li>
+          <li>Sehat Fisik &amp; Mental</li>
+          <li>Doa &amp; Usaha Maksimal</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title blue">Aktivitas Pendukung</div>
+        <div class="chips">
+          <a class="chip blue" href="https://osn.kemdikbud.go.id" target="_blank">Olimpiade Sains</a>
+          <a class="chip blue" href="https://www.google.com/search?q=lomba+karya+tulis+ilmiah+SMA" target="_blank">Lomba KTI</a>
+          <a class="chip blue" href="https://www.google.com/search?q=ekskul+PMR+SMA" target="_blank">Ekskul PMR</a>
+          <a class="chip blue" href="https://www.google.com/search?q=volunteer+bakti+sosial+siswa" target="_blank">Volunteer</a>
+          <a class="chip blue" href="https://www.google.com/search?q=shadowing+dokter+program" target="_blank">Shadowing Dokter</a>
+          <a class="chip blue" href="https://scholar.google.com" target="_blank">Baca Artikel Medis</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="section-center">
+      <div class="stage-label green">Kelas 2 SMA (16–17)</div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node" href="https://www.google.com/search?q=fondasi+akademik+karakter+calon+dokter" target="_blank">
+          🏫 Fondasi Akademik &amp; Karakter
+        </a>
+        <div class="tooltip-box">Bangun pondasi kuat: akademik, karakter, dan kebiasaan sebelum masuk kedokteran.</div>
+      </div>
+
+      <div class="arrow" style="height:24px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.ruangguru.com" target="_blank">📖 Kuasai Pelajaran Inti</a>
+        <div class="tooltip-box">Biologi, Kimia, Fisika, Matematika, Bahasa Inggris — wajib dikuasai untuk FK.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=tips+belajar+teratur+efektif+siswa+SMA" target="_blank">🗓️ Biasakan Belajar Teratur</a>
+        <div class="tooltip-box">Konsistensi harian lebih powerful daripada belajar SKS semalam suntuk.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=kebiasaan+hidup+sehat+pelajar" target="_blank">💪 Bangun Kebiasaan Sehat</a>
+        <div class="tooltip-box">Tidur cukup, olahraga rutin, dan pola makan baik untuk performa optimal.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title purple">Soft Skills Penting</div>
+        <div class="chips">
+          <a class="chip purple" href="https://www.google.com/search?q=tips+komunikasi+efektif" target="_blank">Komunikasi</a>
+          <a class="chip purple" href="https://www.google.com/search?q=empati+dalam+dunia+kedokteran" target="_blank">Empati</a>
+          <a class="chip purple" href="https://www.google.com/search?q=leadership+skill+remaja" target="_blank">Kepemimpinan</a>
+          <a class="chip purple" href="https://www.google.com/search?q=kerja+tim+yang+efektif" target="_blank">Kerja Tim</a>
+          <a class="chip purple" href="https://www.google.com/search?q=manajemen+waktu+pelajar" target="_blank">Manajemen Waktu</a>
+          <a class="chip purple" href="https://www.google.com/search?q=problem+solving+skill" target="_blank">Problem Solving</a>
+          <a class="chip purple" href="https://www.google.com/search?q=mental+baja+ketangguhan+mental" target="_blank">Mental Baja</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ KELAS 3 SMA ═══════════════════ -->
+  <div class="phase-divider"><hr><div class="phase-tag">🎯 Kelas 3 SMA — Usia 17–18</div><hr></div>
+
+  <div class="section">
+    <!-- LEFT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title blue">Pendukung Akademik</div>
+        <div class="chips">
+          <a class="chip blue" href="https://www.google.com/search?q=try+out+UTBK+online" target="_blank">Try Out UTBK Rutin</a>
+          <a class="chip blue" href="https://www.google.com/search?q=tips+belajar+kelompok+efektif" target="_blank">Belajar Kelompok</a>
+          <a class="chip blue" href="https://www.google.com/search?q=analisis+evaluasi+belajar+siswa" target="_blank">Analisis &amp; Evaluasi</a>
+          <a class="chip blue" href="https://www.google.com/search?q=manajemen+waktu+kelas+3+SMA" target="_blank">Manajemen Waktu</a>
+          <a class="chip blue" href="https://www.google.com/search?q=menjaga+kesehatan+saat+ujian" target="_blank">Jaga Kesehatan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="section-center">
+      <div class="stage-label blue">Kelas 3 SMA (17–18)</div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node blue-node" href="https://www.google.com/search?q=persiapan+masuk+PTN+kedokteran" target="_blank">
+          🎓 Fokus Persiapan Masuk PTN
+        </a>
+        <div class="tooltip-box">Semua energi difokuskan ke persiapan UTBK dan seleksi masuk FK terbaik.</div>
+      </div>
+
+      <div class="arrow blue-arrow" style="height:24px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node blue" href="https://snpmb.bppp.kemdikbud.go.id" target="_blank">📝 Persiapan Ujian SNBP</a>
+        <div class="tooltip-box">SNBP: Seleksi Nasional Berdasarkan Prestasi — jalur rapor dan portofolio.</div>
+      </div>
+
+      <div class="arrow blue-arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node blue" href="https://www.zenius.net/pelajaran/utbk" target="_blank">🧪 Persiapan SNBT (UTBK)</a>
+        <div class="tooltip-box">SNBT adalah jalur tes utama — latihan soal intensif sangat krusial.</div>
+      </div>
+
+      <div class="arrow blue-arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node blue" href="https://www.google.com/search?q=ujian+mandiri+FK+PTN+Indonesia" target="_blank">🏛️ Ujian Mandiri FK</a>
+        <div class="tooltip-box">Jalur ujian mandiri tiap PTN sebagai alternatif jika SNBT belum berhasil.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title green">Target Masuk FK</div>
+        <div class="chips">
+          <a class="chip green" href="https://fk.ui.ac.id" target="_blank">FK UI</a>
+          <a class="chip green" href="https://fk.ugm.ac.id" target="_blank">FK UGM</a>
+          <a class="chip green" href="https://fk.unair.ac.id" target="_blank">FK UNAIR</a>
+          <a class="chip green" href="https://fk.itb.ac.id" target="_blank">FK ITB</a>
+          <a class="chip green" href="https://fk.unpad.ac.id" target="_blank">FK UNPAD</a>
+          <a class="chip green" href="https://www.google.com/search?q=FK+PTN+terbaik+Indonesia" target="_blank">PTN Lainnya</a>
+        </div>
+        <div style="margin-top:10px; font-size:0.8rem; color:var(--muted);">
+          IPK minimal <strong>3.50+</strong> • Prestasi &amp; Portofolio dipertimbangkan
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ S1 PROFESI ═══════════════════ -->
+  <div class="phase-divider"><hr><div class="phase-tag">🏥 Tahun 1–4: Pendidikan Kedokteran S1 Profesi</div><hr></div>
+
+  <div class="section">
+    <!-- LEFT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title green">Kompetensi Akademik</div>
+        <div class="chips">
+          <a class="chip green" href="https://www.google.com/search?q=anatomi+kedokteran+belajar" target="_blank">Anatomi</a>
+          <a class="chip green" href="https://www.google.com/search?q=fisiologi+tubuh+manusia" target="_blank">Fisiologi</a>
+          <a class="chip green" href="https://www.google.com/search?q=biokimia+kedokteran" target="_blank">Biokimia</a>
+          <a class="chip green" href="https://www.google.com/search?q=farmakologi+dasar+kedokteran" target="_blank">Farmakologi</a>
+          <a class="chip green" href="https://www.google.com/search?q=patologi+kedokteran+umum" target="_blank">Patologi</a>
+          <a class="chip green" href="https://www.google.com/search?q=ilmu+penyakit+dalam+kedokteran" target="_blank">Ilmu Penyakit</a>
+          <a class="chip green" href="https://www.google.com/search?q=keterampilan+klinik+dasar+OSCE" target="_blank">Klinik Dasar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="section-center">
+      <div class="stage-label green">Tahun 1–4 — S1 Profesi</div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node" href="https://www.google.com/search?q=pendidikan+kedokteran+S1+profesi+Indonesia" target="_blank">
+          🔬 Kuasai Ilmu Dasar &amp; Klinis
+        </a>
+        <div class="tooltip-box">Membangun fondasi ilmu kedokteran dari anatomi sampai keterampilan klinis dasar.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=organisasi+mahasiswa+kedokteran+Indonesia" target="_blank">🤝 Aktif Organisasi &amp; Kepanitiaan</a>
+        <div class="tooltip-box">ISMKI, BEM FK, dan kepanitiaan membangun jaringan dan soft skill kepemimpinan.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=membangun+relasi+networking+mahasiswa+kedokteran" target="_blank">🌐 Bangun Relasi &amp; Jaringan</a>
+        <div class="tooltip-box">Koneksi dengan senior, dosen, dan dokter membuka banyak peluang di masa depan.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=tips+jaga+IPK+dan+kesehatan+mental+mahasiswa+FK" target="_blank">🧘 Jaga IPK &amp; Mental</a>
+        <div class="tooltip-box">IPK memengaruhi peluang residensi. Jaga juga kesehatan mentalmu — burnout itu nyata.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title purple">Pengembangan Diri</div>
+        <div class="chips">
+          <a class="chip purple" href="https://www.google.com/search?q=public+speaking+mahasiswa+kedokteran" target="_blank">Public Speaking</a>
+          <a class="chip purple" href="https://www.google.com/search?q=kepemimpinan+mahasiswa+FK" target="_blank">Kepemimpinan</a>
+          <a class="chip purple" href="https://scholar.google.com" target="_blank">Riset &amp; Publikasi</a>
+          <a class="chip purple" href="https://www.google.com/search?q=bahasa+inggris+medis+untuk+dokter" target="_blank">Bahasa Inggris Medis</a>
+          <a class="chip purple" href="https://www.google.com/search?q=digital+skill+untuk+dokter" target="_blank">Keterampilan Digital</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ KOAS ═══════════════════ -->
+  <div class="phase-divider"><hr><div class="phase-tag">🩺 Tahun 5–6/7: KOAS (Profesi)</div><hr></div>
+
+  <div class="section">
+    <!-- LEFT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title teal">Kompetensi Klinis</div>
+        <div class="chips">
+          <a class="chip teal" href="https://www.google.com/search?q=anamnesis+kedokteran+teknik" target="_blank">Anamnesis</a>
+          <a class="chip teal" href="https://www.google.com/search?q=pemeriksaan+fisik+dokter+umum" target="_blank">Pemeriksaan Fisik</a>
+          <a class="chip teal" href="https://www.google.com/search?q=diagnosis+klinis+kedokteran" target="_blank">Diagnosis</a>
+          <a class="chip teal" href="https://www.google.com/search?q=tatalaksana+penyakit+umum" target="_blank">Tatalaksana</a>
+          <a class="chip teal" href="https://www.google.com/search?q=komunikasi+dokter+pasien" target="_blank">Komunikasi Pasien</a>
+          <a class="chip teal" href="https://www.google.com/search?q=kegawatdaruratan+medis+ATLS+ACLS" target="_blank">Kegawatdaruratan</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title blue">Pilihan Jalur Karir</div>
+        <div class="chips">
+          <a class="chip blue" href="https://www.google.com/search?q=dokter+PNS+RS+pemerintah+syarat" target="_blank">Dokter PNS / RS</a>
+          <a class="chip blue" href="https://www.google.com/search?q=klinik+swasta+dokter+umum" target="_blank">Dokter Swasta</a>
+          <a class="chip blue" href="https://www.google.com/search?q=dokter+perusahaan+occupational+health" target="_blank">Dokter Perusahaan</a>
+          <a class="chip blue" href="https://www.google.com/search?q=dokter+relawan+NGO+MSF" target="_blank">Dokter Relawan/NGO</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="section-center">
+      <div class="stage-label green">KOAS Tahun 5–6/7</div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node" href="https://www.google.com/search?q=koas+kedokteran+Indonesia+pengalaman" target="_blank">
+          🏨 Praktik Klinis di RS
+        </a>
+        <div class="tooltip-box">Fase KOAS adalah saat kamu langsung berhadapan dengan pasien nyata di berbagai stase.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=belajar+dari+pasien+saat+koas" target="_blank">👥 Belajar dari Pasien Nyata</a>
+        <div class="tooltip-box">Setiap pasien adalah guru terbaik — jadilah dokter muda yang penuh perhatian.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=etika+kedokteran+tanggung+jawab+dokter" target="_blank">⚖️ Tanggung Jawab &amp; Etika</a>
+        <div class="tooltip-box">Etika medis dan profesionalisme adalah pondasi menjadi dokter yang dipercaya.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=persiapan+UKMPPD+tips+lulus" target="_blank">📋 Persiapan UKMPPD</a>
+        <div class="tooltip-box">UKMPPD (Uji Kompetensi Mahasiswa Program Profesi Dokter) wajib dilulus untuk jadi dokter.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title purple">Sikap Dokter</div>
+        <div class="chips">
+          <a class="chip purple" href="https://www.google.com/search?q=empati+dokter+pasien" target="_blank">Empati</a>
+          <a class="chip purple" href="https://www.google.com/search?q=profesionalisme+dokter+Indonesia" target="_blank">Profesionalisme</a>
+          <a class="chip purple" href="https://www.google.com/search?q=integritas+dalam+dunia+medis" target="_blank">Integritas</a>
+          <a class="chip purple" href="https://www.google.com/search?q=etos+kerja+dokter" target="_blank">Kerja Keras</a>
+          <a class="chip purple" href="https://www.google.com/search?q=rendah+hati+dokter" target="_blank">Rendah Hati</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ SETELAH LULUS ═══════════════════ -->
+  <div class="phase-divider"><hr><div class="phase-tag">🏆 Setelah Lulus — Dokter Umum & Spesialis</div><hr></div>
+
+  <div class="section">
+    <!-- LEFT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title green">Spesialisasi Populer</div>
+        <div class="chips">
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+penyakit+dalam+PPDS" target="_blank">Penyakit Dalam</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+bedah+PPDS" target="_blank">Bedah</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+anak+PPDS" target="_blank">Anak</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+kandungan+PPDS" target="_blank">Kandungan</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+jantung+PPDS" target="_blank">Jantung</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+kulit+kelamin+PPDS" target="_blank">Kulit &amp; Kelamin</a>
+          <a class="chip green" href="https://www.google.com/search?q=spesialis+saraf+PPDS" target="_blank">Saraf</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="section-center">
+      <div class="tooltip-wrap">
+        <a class="step-node" href="https://www.google.com/search?q=UKMPPD+uji+kompetensi+dokter+Indonesia" target="_blank">📝 UKMPPD</a>
+        <div class="tooltip-box">Uji Kompetensi Mahasiswa Program Profesi Dokter — gerbang menuju STR.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node" href="https://www.google.com/search?q=STR+dokter+umum+cara+mendapatkan" target="_blank">
+          ⚕️ Dokter Umum
+          <span>(STR Aktif)</span>
+        </a>
+        <div class="tooltip-box">Surat Tanda Registrasi (STR) adalah lisensi resmi untuk berpraktik sebagai dokter.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node blue-node" href="https://www.google.com/search?q=PPDS+spesialis+kedokteran+Indonesia" target="_blank">
+          🎓 Dokter Spesialis
+          <span>(Subspesialis)</span>
+        </a>
+        <div class="tooltip-box">PPDS (Program Pendidikan Dokter Spesialis) — pilih bidang yang kamu cintai dan tekuni.</div>
+      </div>
+
+      <div class="arrow" style="height:20px"></div>
+
+      <div class="tooltip-wrap">
+        <a class="main-node final-node" href="https://www.google.com/search?q=menjadi+dokter+kompeten+berintegritas+Indonesia" target="_blank">
+          🌟 DOKTER YANG KOMPETEN, BERINTEGRITAS &amp; BERMANFAAT
+        </a>
+        <div class="tooltip-box">Tujuan akhir: dokter yang melayani dengan hati, ilmu, dan integritas penuh.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side-col">
+      <div class="card">
+        <div class="card-title purple">Pengembangan Lanjut</div>
+        <div class="chips">
+          <a class="chip purple" href="https://www.google.com/search?q=program+internship+fellowship+dokter+Indonesia" target="_blank">Internship / Fellowship</a>
+          <a class="chip purple" href="https://www.google.com/search?q=PPDS+spesialisasi+pendidikan+dokter" target="_blank">PPDS Spesialis</a>
+          <a class="chip purple" href="https://scholar.google.com" target="_blank">Riset &amp; Akademik</a>
+          <a class="chip purple" href="https://www.google.com/search?q=kewirausahaan+kesehatan+healthtech" target="_blank">Kewirausahaan Kesehatan</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title teal">Kontribusi</div>
+        <div class="chips">
+          <a class="chip teal" href="https://www.google.com/search?q=pelayanan+kesehatan+masyarakat+dokter" target="_blank">Pelayanan Kesehatan</a>
+          <a class="chip teal" href="https://www.google.com/search?q=edukasi+kesehatan+masyarakat" target="_blank">Edukasi Masyarakat</a>
+          <a class="chip teal" href="https://www.google.com/search?q=inovasi+penelitian+kesehatan+Indonesia" target="_blank">Inovasi &amp; Penelitian</a>
+          <a class="chip teal" href="https://www.google.com/search?q=kebijakan+kesehatan+Indonesia" target="_blank">Kebijakan Kesehatan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ INFO BOTTOM ═══════════════════ -->
+  <div class="info-row">
+    <div class="card">
+      <div class="card-title blue">💡 Ingat!</div>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.6;">Proses panjang, tapi setiap langkah kecil hari ini membentuk masa depanmu. Konsisten dan percayalah pada prosesnya.</p>
+    </div>
+    <div class="card">
+      <div class="card-title green">⏰ Jadwal Harian Ideal</div>
+      <ul class="card-list">
+        <li>Belajar 3–5 jam efektif</li>
+        <li>Olahraga 30–60 menit</li>
+        <li>Baca 30 menit</li>
+        <li>Istirahat cukup (7–8 jam)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title purple">📚 Sumber Belajar</div>
+      <div class="chips">
+        <a class="chip purple" href="https://www.ruangguru.com" target="_blank">Ruangguru</a>
+        <a class="chip purple" href="https://www.zenius.net" target="_blank">Zenius</a>
+        <a class="chip purple" href="https://quipper.com" target="_blank">Quipper</a>
+        <a class="chip purple" href="https://www.youtube.com/results?search_query=video+edukasi+kedokteran" target="_blank">YouTube Edukasi</a>
+        <a class="chip purple" href="https://scholar.google.com" target="_blank">Jurnal Ilmiah</a>
+        <a class="chip purple" href="https://www.google.com/search?q=buku+teks+kedokteran+Indonesia" target="_blank">Buku Teks</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer-bar">
+  ⭐ Kunci Sukses: <span>Niat yang Kuat</span> + <span>Usaha yang Cerdas</span> + <span>Doa yang Tulus</span>
+</div>
+
+<script>
+  // Smooth hover animations for all clickable nodes
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => el.style.transition = 'all 0.22s cubic-bezier(.4,0,.2,1)');
+  });
+
+  // Add subtle entrance animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .main-node, .step-node').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
